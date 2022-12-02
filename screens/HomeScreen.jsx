@@ -26,7 +26,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 20,
+        borderWidth: 1,
     },
     image: {
+        width: '100%',
     }
 });
