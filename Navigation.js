@@ -7,6 +7,7 @@ import Historia from './screens/Historia';
 import Servicios from './screens/Servicios';
 import Noticias from './screens/Noticias';
 import Videos from './screens/Videos';
+import Albergues from './screens/Albergues';
 
 const Drawer = createDrawerNavigator();
 
@@ -38,6 +39,11 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="Videos"
                 component={Videos}
+            />
+
+            <Drawer.Screen
+                name="Albergues"
+                component={Albergues}
             />
 
         </Drawer.Navigator>
