@@ -16,9 +16,9 @@ const Servicios = () => {
     return (
         <ScrollView>
         <View style={styles.container}>
-            <Text style={styles.title}>Servicios</Text>
 
             <View style={{ alignItems: 'center' }}>
+                <Text style={styles.title}>Servicios</Text>
                 {servicios.map((servicio, index) => (
                     <Service key={index} servicio={servicio}/>
                 ))}
@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         borderBottomWidth: 1,
         marginBottom: 20,
+        borderColor: '#ccc',
+        color: '#000',
+        width: '90%',
     },
-    
 });
