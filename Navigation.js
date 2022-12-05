@@ -5,6 +5,7 @@ import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import Historia from './screens/Historia';
 import Servicios from './screens/Servicios';
+import Noticias from './screens/Noticias';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +28,12 @@ const MyDrawer = () => {
                 name="Servicios"
                 component={Servicios}
             />
+
+            <Drawer.Screen
+                name="Noticias"
+                component={Noticias}
+            />
+
         </Drawer.Navigator>
     )
 }
