@@ -9,6 +9,7 @@ import Noticias from './screens/Noticias';
 import Videos from './screens/Videos';
 import Albergues from './screens/Albergues';
 import Mapa from './screens/Mapa';
+import MedidasPreventivas from './screens/MedidasPreventivas';
 
 const Drawer = createDrawerNavigator();
 
@@ -50,6 +51,11 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="Mapa"
                 component={Mapa}
+            />
+
+            <Drawer.Screen
+                name="MedidasPreventivas"
+                component={MedidasPreventivas}
             />
         </Drawer.Navigator>
     )
