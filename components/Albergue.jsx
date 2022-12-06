@@ -2,10 +2,10 @@ import { View, Text, StyleSheet, TouchableOpacity  } from 'react-native'
 import React from 'react'
 
 const Albergue = (props) => {
-    const { albergue } = props;
+    const { albergue, onPress } = props;
     return (
         <View style={styles.container}>
-            <TouchableOpacity  onPress={() => console.log(albergue.codigo)}>
+            <TouchableOpacity  onPress={onPress}>
             <View style={styles.card}>
                 <View>
                     <Text style={styles.cardTitle}>
