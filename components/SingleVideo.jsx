@@ -1,28 +1,5 @@
-// import { View, Text, Video } from 'react-native'
-// import React from 'react'
-
-// const SingleVideo = (props) => {
-//     const { video } = props;
-//     return (
-//         <View>
-//             <Text>Video</Text>
-//             <Video
-//                 source={{ uri: video.link }}
-//                 rate={1.0}
-//                 volume={1.0}
-//                 isMuted={false}
-//                 resizeMode="cover"
-//                 shouldPlay
-//                 isLooping
-//                 style={{ width: 300, height: 300 }}
-//             />
-//         </View>
-//     )
-// }
-
-// export default SingleVideo
-
 import { View, Text, StyleSheet } from 'react-native'
+import { WebView } from 'react-native-webview';
 import React from 'react'
 
 const SingleVideo = (props) => {
@@ -30,6 +7,11 @@ const SingleVideo = (props) => {
     return (
         <View style={styles.container}>
             <View>
+                <WebView
+                    source={{ uri: `https://www.youtube.com/embed/${video.link}` }}
+                    style={styles.video}
+                    javascriptEnabled={true}
+                />
                 <Text
                     style={styles.titulo}
                 >
@@ -40,11 +22,14 @@ const SingleVideo = (props) => {
                 >
                     {video.fecha}
                 </Text>
-                <Text
-                    style={styles.description}
-                >
-                    {video.descripcion}
-                </Text>
+
+                {video.descripcion && (
+                    <Text
+                        style={styles.description}
+                    >
+                        {video.descripcion}
+                    </Text>
+                )}
             </View>
         </View>
     )
@@ -82,5 +67,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
         margin: 10,
     },
-
+    video: {
+        width: '100%',
+        height: 200,
+        resizeMode: 'cover',
+    },
 });

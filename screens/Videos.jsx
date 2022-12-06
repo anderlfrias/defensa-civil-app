@@ -16,12 +16,13 @@ const Videos = () => {
 
     return (
         <ScrollView>
-            <View style={{ alignItems: 'center' }}>
-            <Text style={styles.title}>Videos</Text>
 
-            {videos.map((video, index) => (
-                <SingleVideo key={index} video={video} />
-            ))}
+            <View style={{ alignItems: 'center', backgroundColor: '#fff' }}>
+                <Text style={styles.title}>Videos</Text>
+
+                {videos.map((video, index) => (
+                    <SingleVideo key={index} video={video} />
+                ))}
             </View>
         </ScrollView>
     )
