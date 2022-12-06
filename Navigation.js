@@ -8,6 +8,7 @@ import Servicios from './screens/Servicios';
 import Noticias from './screens/Noticias';
 import Videos from './screens/Videos';
 import Albergues from './screens/Albergues';
+import Mapa from './screens/Mapa';
 
 const Drawer = createDrawerNavigator();
 
@@ -46,6 +47,10 @@ const MyDrawer = () => {
                 component={Albergues}
             />
 
+            <Drawer.Screen
+                name="Mapa"
+                component={Mapa}
+            />
         </Drawer.Navigator>
     )
 }
