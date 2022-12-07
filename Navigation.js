@@ -21,6 +21,7 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="Home"
                 component={HomeScreen}
+                options={{ title: 'Inicio' }}
             />
 
             <Drawer.Screen

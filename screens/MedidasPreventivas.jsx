@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { url } from '../utils/config'
+import MedidaPreventiva from '../components/MedidaPreventiva'
 
 const MedidasPreventivas = () => {
     const [medidasPreventivas, setMedidasPreventivas] = useState([]);
@@ -18,7 +19,10 @@ const MedidasPreventivas = () => {
                 <View style={{ alignItems: 'center'}}>
                     <Text style={styles.title}>MedidasPreventivas</Text>
                     {medidasPreventivas.map((medidaPreventiva, index) => (
-                        <Text key={index}>{medidaPreventiva.titulo}</Text>
+                        <MedidaPreventiva
+                            key={index}
+                            medidaPreventiva={medidaPreventiva}
+                        />
                     ))}
                 </View>
             </View>
