@@ -11,6 +11,7 @@ import Albergues from './screens/Albergues';
 import Mapa from './screens/Mapa';
 import MedidasPreventivas from './screens/MedidasPreventivas';
 import Miembros from './screens/Miembros';
+import Voluntario from './screens/Voluntario';
 
 const Drawer = createDrawerNavigator();
 
@@ -63,6 +64,12 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="Miembros"
                 component={Miembros}
+            />
+
+            <Drawer.Screen
+                name="Voluntario"
+                component={Voluntario}
+                options={{ title: 'Quiero ser voluntario' }}
             />
         </Drawer.Navigator>
     )
