@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 import React from 'react';
-
+import { globalStyles } from '../utils/globalStyles';
 
 const Service = (props) => {
     const { servicio } = props;
@@ -24,20 +24,28 @@ export default Service
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
-        backgroundColor: '#fff',
+        ...globalStyles.card,
+        // padding: 10,
+        // backgroundColor: '#fff',
         marginBottom: 20,
-        borderRadius: 5,
-        width: '90%',
+        // borderRadius: 5,
         //Shadow styles
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2,
+        // },
+        // shadowOpacity: 0.23,
+        // shadowRadius: 2.62,
+        // elevation: 4,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+        elevation: 5,
     },
     image: {
         width: '100%',

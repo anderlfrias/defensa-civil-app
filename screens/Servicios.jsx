@@ -2,6 +2,7 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { url } from '../utils/config'
 import Service from '../components/Service';
+import { globalStyles } from '../utils/globalStyles';
 
 const Servicios = () => {
     const [servicios, setServicios] = useState([]);
@@ -17,7 +18,7 @@ const Servicios = () => {
         <ScrollView>
         <View style={styles.container}>
 
-            <View style={{ alignItems: 'center' }}>
+            <View style={{  }}>
                 <Text style={styles.title}>Servicios</Text>
                 {servicios.map((servicio, index) => (
                     <Service key={index} servicio={servicio}/>
@@ -32,11 +33,10 @@ export default Servicios;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#fff',
+        ...globalStyles.container,
     },
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
         marginTop: 20,
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 20,
         borderColor: '#ccc',
-        color: '#000',
         width: '90%',
     },
 });
