@@ -60,6 +60,7 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="MedidasPreventivas"
                 component={MedidasPreventivas}
+                options={{ title: 'Medidas Preventivas' }}
             />
 
             <Drawer.Screen

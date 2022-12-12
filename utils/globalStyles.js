@@ -7,6 +7,8 @@ const globalStyles = {
     },
     title: {
         color: '#4D4B55',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     text: {
         color: '#75737B',
