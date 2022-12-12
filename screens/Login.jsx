@@ -2,10 +2,12 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Keyboard, T
 import React, {useState} from 'react'
 import { globalStyles } from '../utils/globalStyles'
 import { url } from '../utils/config'
+import secureStore from '../utils/secureStore';
 
-const Login = () => {
+const Login = ({ navigation }) => {
     const [credentials, setCredentials] = useState({});
     const [isLoggIn, setIsLoggIn] = useState(false);
+    const { save } = secureStore();
 
     const loginUser = async(data) => {
         if (!validateFields()) {
@@ -26,11 +28,20 @@ const Login = () => {
             body: formData
         })
             .then((response) => response.json())
-            .then((responseJson) => {
+            .then(async(responseJson) => {
                 console.log(responseJson);
-                alert(responseJson.mensaje);
                 if (responseJson.exito) {
+                    await save(
+                        'auth',
+                        JSON.stringify({
+                            user: responseJson.datos,
+                            isLoggedIn: true
+                        })
+                    );
                     setCredentials({});
+                    navigation.jumpTo('Home');
+                } else{
+                    alert(responseJson.mensaje);
                 }
             })
             .catch((error) => {
@@ -81,10 +92,22 @@ const Login = () => {
                     />
                 </View>
 
+                <TouchableOpacity
+                    onPress={() => console.log('Olvidaste tu contraseña')}
+                    style={{ marginBottom: 20 }}
+                >
+                    <Text style={{...styles.label, color: "#00B0FF", fontWeight: "bold"}}>
+                        ¿Olvidaste tu contraseña?
+                    </Text>
+                </TouchableOpacity>
+
                 <View>
                     <TouchableOpacity
                         onPress={async() => await loginUser(credentials)}
-                        style={styles.button}
+                        style={{
+                            ...styles.button,
+                            backgroundColor: isLoggIn ? '#D9E3F6' : '#00B0FF',
+                        }}
                         disabled={isLoggIn}
                     >
                         <Text
@@ -94,6 +117,20 @@ const Login = () => {
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
+                    <Text style={styles.label}>
+                        ¿No tienes una cuenta?
+                    </Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.jumpTo('Voluntario')}
+                    >
+                        <Text style={{...styles.label, color: "#00B0FF", fontWeight: "bold", marginLeft: 7}}>
+                            Registrate
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         </View>
         </TouchableWithoutFeedback>
@@ -144,7 +181,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#00B0FF',
         padding: 10,
         borderRadius: 16,
-        marginTop: 20,
+        marginBottom: 20,
     },
     buttonText: {
         fontSize: 20,
