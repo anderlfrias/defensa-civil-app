@@ -29,11 +29,12 @@ const styles = StyleSheet.create({
     },
     card: {
         ...globalStyles.card,
+        width: '100%',
     },
     image: {
-        width: 250,
-        height: 250,
-        resizeMode: 'cover',
+        width: '100%',
+        height: 300,
+        resizeMode: 'contain',
         borderRadius: 5,
     },
     title: {

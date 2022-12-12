@@ -6,7 +6,7 @@ const Voluntario = () => {
     const [datos, setDatos] = useState({});
     const [isSending, setIsSending] = useState(false);
 
-    const sudmit = (data) => {
+    const sudmit = async(data) => {
         if (!validateFields()) {
             alert("Debe completar todos los campos");
             return;
@@ -24,7 +24,7 @@ const Voluntario = () => {
 
         console.log(formData);
 
-        fetch('https://adamix.net/defensa_civil/def/registro.php', {
+        await fetch('https://adamix.net/defensa_civil/def/registro.php', {
             method: 'POST',
             body: formData
         })
@@ -123,7 +123,7 @@ const Voluntario = () => {
 
                     <View>
                         <TouchableOpacity
-                            onPress={() => sudmit(datos)}
+                            onPress={async() => await sudmit(datos)}
                             style={styles.button}
                             disabled={isSending}
                         >

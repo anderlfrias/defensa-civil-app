@@ -13,6 +13,7 @@ import MedidasPreventivas from './screens/MedidasPreventivas';
 import Miembros from './screens/Miembros';
 import Voluntario from './screens/Voluntario';
 import About from './screens/About';
+import Login from './screens/Login';
 
 const Drawer = createDrawerNavigator();
 
@@ -78,6 +79,12 @@ const MyDrawer = () => {
                 name="About"
                 component={About}
                 options={{ title: 'Acerca de' }}
+            />
+
+            <Drawer.Screen
+                name="Login"
+                component={Login}
+                options={{ title: 'Iniciar Sesión' }}
             />
         </Drawer.Navigator>
     )

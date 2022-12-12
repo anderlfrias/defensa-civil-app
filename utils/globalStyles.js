@@ -1,8 +1,8 @@
 const globalStyles = {
     container: {
+        flex: 1,
         alignItems: 'center',
         backgroundColor: '#F8F7FA',
-        flex: 1,
         padding: 20,
     },
     title: {
