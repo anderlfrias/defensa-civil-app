@@ -84,7 +84,10 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="Login"
                 component={Login}
-                options={{ title: 'Iniciar Sesión' }}
+                options={{
+                    title: 'Iniciar Sesión',
+                    headerShown: false,
+                }}
             />
         </Drawer.Navigator>
     )
