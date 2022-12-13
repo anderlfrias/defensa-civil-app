@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
+import { globalStyles } from '../utils/globalStyles';
 
 const Historia = () => {
     return (
@@ -50,17 +51,22 @@ export default Historia;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: 20,
+        ...globalStyles.container,
+        backgroundColor: '#fff',
+        alignItems: 'flex-start',
     },
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
         marginTop: 20,
         textTransform: 'uppercase',
         borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        width: '100%',
     },
     text: {
+        ...globalStyles.text,
         fontSize: 16,
         marginTop: 10,
     }

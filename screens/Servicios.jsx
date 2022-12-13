@@ -18,8 +18,8 @@ const Servicios = () => {
         <ScrollView>
         <View style={styles.container}>
 
+            <Text style={styles.title}>Servicios</Text>
             <View style={{  }}>
-                <Text style={styles.title}>Servicios</Text>
                 {servicios.map((servicio, index) => (
                     <Service key={index} servicio={servicio}/>
                 ))}
@@ -34,6 +34,7 @@ export default Servicios;
 const styles = StyleSheet.create({
     container: {
         ...globalStyles.container,
+        backgroundColor: '#fff',
     },
     title: {
         ...globalStyles.title,
@@ -44,6 +45,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 20,
         borderColor: '#ccc',
-        width: '90%',
+        width: '100%',
     },
 });

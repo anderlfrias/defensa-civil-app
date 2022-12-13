@@ -1,5 +1,5 @@
-import { View, Text, Image, StyleSheet, ScrollView, Dimensions } from 'react-native'
-import React from 'react'
+import { View, Text, Image, StyleSheet, ScrollView, Dimensions, Alert } from 'react-native'
+import React, { useEffect } from 'react'
 import Carousel from '../components/Carousel'
 import { globalStyles } from '../utils/globalStyles';
 

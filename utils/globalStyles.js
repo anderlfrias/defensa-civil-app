@@ -11,7 +11,7 @@ const globalStyles = {
         fontWeight: 'bold',
     },
     text: {
-        color: '#75737B',
+        color: '#555',
     },
     subtitle: {
         color: '#A1A0A5',

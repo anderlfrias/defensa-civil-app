@@ -4,6 +4,7 @@ import { globalStyles } from '../utils/globalStyles';
 
 const Service = (props) => {
     const { servicio } = props;
+
     return (
         <View style={styles.container}>
             <Image
@@ -25,19 +26,7 @@ export default Service
 const styles = StyleSheet.create({
     container: {
         ...globalStyles.card,
-        // padding: 10,
-        // backgroundColor: '#fff',
         marginBottom: 20,
-        // borderRadius: 5,
-        //Shadow styles
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // shadowOpacity: 0.23,
-        // shadowRadius: 2.62,
-        // elevation: 4,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -54,11 +43,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     title: {
+        ...globalStyles.title,
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 10,
     },
     description: {
+        ...globalStyles.text,
         fontSize: 16,
         marginTop: 10,
     },

@@ -2,6 +2,7 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { url } from '../utils/config'
 import News from '../components/News'
+import { globalStyles } from '../utils/globalStyles'
 
 const Noticias = () => {
     const [noticias, setNoticias] = useState([]);
@@ -33,12 +34,11 @@ export default Noticias
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
+        ...globalStyles.container,
         backgroundColor: '#fff',
-        alignItems: 'center',
     },
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
         marginTop: 20,
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 20,
         borderColor: '#ccc',
-        color: '#000',
-        width: '90%',
+        width: '100%',
     },
 });
