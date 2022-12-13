@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import React from 'react';
 
 //screens
@@ -15,6 +15,7 @@ import Miembros from './screens/Miembros';
 import Voluntario from './screens/Voluntario';
 import About from './screens/About';
 import Login from './screens/Login';
+import RecoverPassword from './screens/RecoverPassword';
 
 const Drawer = createDrawerNavigator();
 
@@ -87,6 +88,15 @@ const MyDrawer = () => {
                 component={Login}
                 options={{
                     title: 'Iniciar Sesión',
+                    headerShown: false,
+                }}
+            />
+
+            <Drawer.Screen
+                name="RecoverPassword"
+                component={RecoverPassword}
+                options={{
+                    title: 'Recuperar Contraseña',
                     headerShown: false,
                 }}
             />
