@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, Linking, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../utils/globalStyles'
 
@@ -14,8 +14,32 @@ const About = () => {
                     Anderson Leonel Frias Acosta
                 </Text>
                 <Text style={styles.description}>
-                    Desarrollador Web
+                    Desarrollador
                 </Text>
+
+                {/* Contacto */}
+                <Text style={styles.title}>
+                    Contacto
+                </Text>
+
+                {/* Email */}
+                <TouchableOpacity
+                    onPress={() => Linking.openURL('mailto:anderl.friaas@gmail.com')}
+                >
+                    <Text style={styles.description}>
+                        anderl.friaas@gmail.com
+                    </Text>
+                </TouchableOpacity>
+
+                {/* Celular */}
+                <TouchableOpacity
+                    onPress={() => Linking.openURL('tel:+18295263375')}
+                >
+                    <Text style={styles.description}>
+                        +1 (829) 526-3375
+                    </Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     )
@@ -43,5 +67,6 @@ const styles = StyleSheet.create({
     },
     description: {
         ...globalStyles.text,
+        fontSize: 16,
     },
 })

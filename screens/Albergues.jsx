@@ -2,6 +2,7 @@ import { View, Text, ScrollView, StyleSheet, Modal, TouchableOpacity } from 'rea
 import React, { useEffect, useState } from 'react'
 import { url } from '../utils/config'
 import Albergue from '../components/Albergue'
+import { globalStyles } from '../utils/globalStyles'
 
 const Albergues = () => {
     const [albergues, setAlbergues] = useState([]);
@@ -19,7 +20,6 @@ const Albergues = () => {
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.title}>Albergues</Text>
-            </View>
             {albergues.map((albergue, index) => (
                 <Albergue
                     key={index}
@@ -30,6 +30,7 @@ const Albergues = () => {
                     }}
                 />
             ))}
+            </View>
 
             <Modal
                 animationType="fade"
@@ -134,19 +135,18 @@ export default Albergues
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        ...globalStyles.container,
         backgroundColor: '#fff',
-        alignItems: 'center',
     },
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
-        marginTop: 20,
         textTransform: 'uppercase',
         borderBottomWidth: 1,
-        marginBottom: 20,
         borderColor: '#ccc',
-        width: '90%',
+        width: '100%',
+        marginBottom: 10,
     },
     modal: {
         flex: 1,
@@ -169,12 +169,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     modalTitle: {
+        ...globalStyles.title,
         fontSize: 18,
         fontWeight: 'bold',
     },
     modalSubtitle: {
+        ...globalStyles.subtitle,
         fontSize: 14,
-        color: '#ccc',
     },
     modalBody: {
         width: '100%',
@@ -197,21 +198,23 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     modalCloseButtonText: {
+        ...globalStyles.text,
         fontSize: 18,
-        color: '#1a202c',
     },
     detailsCard: {
         width: '100%',
         height: 50,
         alignItems: 'flex-start',
         justifyContent: 'center',
-        borderBottomWidth: 1,
+        borderBottomWidth: .5,
         borderColor: '#ccc',
     },
     detailsTitle: {
+        ...globalStyles.text,
         fontSize: 14,
     },
     detailsDescription: {
+        ...globalStyles.text,
         fontSize: 18,
         fontWeight: 'bold',
     },

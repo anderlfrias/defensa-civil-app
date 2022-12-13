@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { url } from '../utils/config'
 import MedidaPreventiva from '../components/MedidaPreventiva'
+import { globalStyles } from '../utils/globalStyles'
 
 const MedidasPreventivas = () => {
     const [medidasPreventivas, setMedidasPreventivas] = useState([]);
@@ -16,8 +17,8 @@ const MedidasPreventivas = () => {
     return (
         <ScrollView style={{ backgroundColor: '#fff'}}>
             <View style={styles.container}>
-                <View style={{ alignItems: 'center'}}>
-                    <Text style={styles.title}>MedidasPreventivas</Text>
+                <Text style={styles.title}>MedidasPreventivas</Text>
+                <View>
                     {medidasPreventivas.map((medidaPreventiva, index) => (
                         <MedidaPreventiva
                             key={index}
@@ -34,11 +35,13 @@ export default MedidasPreventivas
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
+        ...globalStyles.container,
+        // flex: 1,
+        // justifyContent: 'center',
         backgroundColor: '#fff',
     },
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
         marginTop: 20,
@@ -46,7 +49,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 20,
         borderColor: '#ccc',
-        color: '#000',
-        width: '90%',
+        width: '100%',
     },
 });

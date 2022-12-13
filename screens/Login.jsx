@@ -2,12 +2,12 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Keyboard, T
 import React, {useState} from 'react'
 import { globalStyles } from '../utils/globalStyles'
 import { url } from '../utils/config'
-import secureStore from '../utils/secureStore';
+import { save, getValueFor } from '../utils/secureStore';
+import { storeData } from '../utils/AsyncStorage';
 
 const Login = ({ navigation }) => {
     const [credentials, setCredentials] = useState({});
     const [isLoggIn, setIsLoggIn] = useState(false);
-    const { save } = secureStore();
 
     const loginUser = async(data) => {
         if (!validateFields()) {
@@ -31,15 +31,22 @@ const Login = ({ navigation }) => {
             .then(async(responseJson) => {
                 console.log(responseJson);
                 if (responseJson.exito) {
+                    await storeData({
+                        user: responseJson.datos,
+                        isLoggedIn: true
+                    });
+
                     await save(
                         'auth',
                         JSON.stringify({
                             user: responseJson.datos,
                             isLoggedIn: true
                         })
-                    );
-                    setCredentials({});
-                    navigation.jumpTo('Home');
+                    ).then(async() => {
+                        setCredentials({});
+                        console.log("Login", await getValueFor('auth'));
+                        navigation.jumpTo('Home');
+                    });
                 } else{
                     alert(responseJson.mensaje);
                 }

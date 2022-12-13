@@ -2,10 +2,30 @@ import { View, Text, Image, StyleSheet, ScrollView, Dimensions, Alert } from 're
 import React, { useEffect } from 'react'
 import Carousel from '../components/Carousel'
 import { globalStyles } from '../utils/globalStyles';
+import { getValueFor, deleteValueFor } from '../utils/secureStore';
 
 const { width } = Dimensions.get('window');
 
 const HomeScreen = () => {
+    useEffect(() => {
+        // Alert.alert(
+        //     "Bienvenido",
+        //     "Esta aplicación fue desarrollada por Anderson Frias",
+        //     [
+        //         {
+        //             text: "De acuerdo",
+        //             onPress: () => console.log("OK Pressed")
+        //         }
+        //     ],
+        //     { cancelable: false }
+        // );
+
+        // deleteValueFor('auth');
+        // deleteValueFor('auth').then(() => {
+        //     console.log("Deleted");
+        // });
+    }, []);
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>

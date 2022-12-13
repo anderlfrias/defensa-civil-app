@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity  } from 'react-native'
 import React from 'react'
+import { globalStyles } from '../utils/globalStyles'
 
 const Albergue = (props) => {
     const { albergue, onPress } = props;
@@ -30,29 +31,30 @@ export default Albergue
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
+        // paddingHorizontal: 10,
         // marginBottom: 10,
         backgroundColor: '#fff',
+        width: '100%',
+        marginBottom: 10,
+        borderBottomWidth: .5,
+        borderColor: '#ccc',
     },
     card: {
         backgroundColor: '#fff',
-        padding: 10,
-        // borderRadius: 10,
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 0.5,
+        paddingVertical: 10,
     },
     cardTitle: {
+        ...globalStyles.text,
         fontSize: 18,
         fontWeight: 'bold',
         textTransform: 'uppercase',
-        color: '#1a1a1a',
     },
     cardSubtitle: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     cardSubtitleText: {
+        ...globalStyles.text,
         fontSize: 14,
-        color: '#373737',
     },
 });

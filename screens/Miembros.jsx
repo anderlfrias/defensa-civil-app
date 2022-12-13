@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { url } from '../utils/config'
 import Member from '../components/Member'
+import { globalStyles } from '../utils/globalStyles'
 
 const Miembros = () => {
     const [miembros, setMiembros] = useState([]);
@@ -16,9 +17,8 @@ const Miembros = () => {
     return (
         <ScrollView>
             <View style={styles.container}>
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.title}>Miembros</Text>
-
+                <Text style={styles.title}>Miembros</Text>
+                <View>
                     {miembros.map((miembro, index) => (
                         <Member
                             key={index}
@@ -35,19 +35,17 @@ export default Miembros
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
+        ...globalStyles.container,
         backgroundColor: '#fff',
     },
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
-        marginTop: 20,
         textTransform: 'uppercase',
         borderBottomWidth: 1,
         marginBottom: 20,
         borderColor: '#ccc',
-        color: '#000',
-        width: '90%',
+        width: '100%',
     },
 });

@@ -1,8 +1,24 @@
-import { View, Text, StyleSheet, Image } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
 const MedidaPreventiva = (props) => {
     const { medidaPreventiva } = props;
+    const [description, setDescription] = useState(medidaPreventiva.descripcion);
+    const [showMore, setShowMore] = useState(false);
+
+    const handleDescription = () => {
+        if (description.length > 255) {
+            setDescription(description.substring(0, 255) + '...');
+        }
+    }
+
+    useEffect(() => {
+        if (!showMore) {
+            handleDescription();
+        } else {
+            setDescription(medidaPreventiva.descripcion);
+        }
+    }, [showMore]);
     return (
         <View style={styles.container}>
             <View>
@@ -13,9 +29,21 @@ const MedidaPreventiva = (props) => {
                 <Text style={styles.title}>
                     {medidaPreventiva.titulo}
                 </Text>
-                <Text style={styles.description}>
-                    {medidaPreventiva.descripcion}
-                </Text>
+
+                <View>
+                    <Text style={styles.description}>
+                        {description}
+                    </Text>
+                        <TouchableOpacity
+                            onPress={() => {
+                                setShowMore(!showMore)
+                            }}
+                        >
+                            <Text style={{...styles.description}}>
+                                {showMore ? 'Ver menos' : 'Ver más'}
+                            </Text>
+                        </TouchableOpacity>
+                </View>
             </View>
         </View>
     )
@@ -25,13 +53,13 @@ export default MedidaPreventiva;
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15,
         backgroundColor: '#fff',
         marginBottom: 20,
         borderRadius: 5,
         width: '100%',
     },
     image: {
+        alignSelf: 'center',
         width: 250,
         height: 250,
     },

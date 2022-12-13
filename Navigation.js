@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
+
 //screens
 import HomeScreen from './screens/HomeScreen';
 import Historia from './screens/Historia';

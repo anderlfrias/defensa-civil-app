@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
         ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
-        marginTop: 20,
         textTransform: 'uppercase',
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',

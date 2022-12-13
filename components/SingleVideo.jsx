@@ -39,11 +39,10 @@ export default SingleVideo
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15,
         backgroundColor: '#fff',
         marginBottom: 20,
         borderRadius: 5,
-        width: '90%',
+        width: '100%',
         //Shadow styles
         shadowColor: "#000",
         shadowOffset: {

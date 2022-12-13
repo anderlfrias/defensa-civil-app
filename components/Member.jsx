@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
+import { globalStyles } from '../utils/globalStyles'
 
 const Member = (props) => {
     const { member } = props;
@@ -23,20 +24,16 @@ export default Member
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
-        backgroundColor: '#fff',
+        ...globalStyles.card,
         marginBottom: 20,
-        borderRadius: 5,
-        width: '90%',
-        //Shadow styles
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 4,
+        shadowOpacity: 0.20,
+        shadowRadius: 1.41,
+        elevation: 5,
     },
     image: {
         width: '100%',
@@ -45,11 +42,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     title: {
+        ...globalStyles.title,
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 10,
     },
     description: {
+        ...globalStyles.text,
         fontSize: 16,
         marginTop: 10,
     },

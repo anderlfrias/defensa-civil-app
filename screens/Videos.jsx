@@ -1,7 +1,8 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { url } from '../utils/config'
-import SingleVideo from '../components/SingleVideo'
+import SingleVideo from '../components/SingleVideo';
+import { globalStyles } from '../utils/globalStyles';
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
@@ -17,7 +18,7 @@ const Videos = () => {
     return (
         <ScrollView>
 
-            <View style={{ alignItems: 'center', backgroundColor: '#fff' }}>
+            <View style={{ alignItems: 'center', backgroundColor: '#fff', padding: 20}}>
                 <Text style={styles.title}>Videos</Text>
 
                 {videos.map((video, index) => (
@@ -32,6 +33,7 @@ export default Videos;
 
 const styles = StyleSheet.create({
     title: {
+        ...globalStyles.title,
         fontSize: 27,
         fontWeight: 'bold',
         marginTop: 20,
@@ -39,7 +41,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginBottom: 20,
         borderColor: '#ccc',
-        color: '#000',
-        width: '90%',
+        width: '100%',
     },
 });
