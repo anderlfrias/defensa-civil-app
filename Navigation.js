@@ -19,6 +19,7 @@ import About from './screens/About';
 import Login from './screens/Login';
 import RecoverPassword from './screens/RecoverPassword';
 import ReportarSituacion from './screens/RepostarSituacion';
+import Situaciones from './screens/Situaciones';
 
 const Drawer = createDrawerNavigator();
 
@@ -152,6 +153,11 @@ const LoginDrawer = ({ navigation }) => {
             />
 
             {/* // Mis situaciones */}
+            <Drawer.Screen
+                name="Situaciones"
+                component={Situaciones}
+                options={{ title: 'Mis situaciones' }}
+            />
 
             {/* // Mis reportes */}
 
