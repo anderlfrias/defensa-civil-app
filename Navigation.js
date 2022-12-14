@@ -16,6 +16,7 @@ import Voluntario from './screens/Voluntario';
 import About from './screens/About';
 import Login from './screens/Login';
 import RecoverPassword from './screens/RecoverPassword';
+import ReportarSituacion from './screens/RepostarSituacion';
 
 const Drawer = createDrawerNavigator();
 
@@ -75,6 +76,12 @@ const MyDrawer = () => {
                 name="Voluntario"
                 component={Voluntario}
                 options={{ title: 'Quiero ser voluntario' }}
+            />
+
+            <Drawer.Screen
+                name="NuevoReporte"
+                component={ReportarSituacion}
+                options={{ title: 'Reportar una situacion' }}
             />
 
             <Drawer.Screen
