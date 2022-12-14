@@ -1,6 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { TouchableOpacity, Text } from 'react-native'
 import React from 'react';
+import { getValueFor, deleteValueFor } from './utils/secureStore'
 
 //screens
 import HomeScreen from './screens/HomeScreen';
@@ -28,7 +30,9 @@ const MyDrawer = () => {
             <Drawer.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ title: 'Inicio' }}
+                options={{
+                    title: 'Inicio',
+                }}
             />
 
             <Drawer.Screen
@@ -79,12 +83,6 @@ const MyDrawer = () => {
             />
 
             <Drawer.Screen
-                name="NuevoReporte"
-                component={ReportarSituacion}
-                options={{ title: 'Reportar una situacion' }}
-            />
-
-            <Drawer.Screen
                 name="About"
                 component={About}
                 options={{ title: 'Acerca de' }}
@@ -99,6 +97,65 @@ const MyDrawer = () => {
                 }}
             />
 
+        </Drawer.Navigator>
+    )
+}
+
+const LoginDrawer = ({ navigation }) => {
+    return (
+        <Drawer.Navigator
+            initialRouteName="Home"
+        >
+            <Drawer.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    title: 'Inicio',
+                    headerRight: () => (
+                        <TouchableOpacity
+                            onPress={() => {
+                                console.log('Cerrar Sesión');
+                                deleteValueFor('auth');
+
+                                // navigation.navigate('Login');
+                                navigation?.reset({
+                                    index: 0,
+                                    routes: [{ name: 'Home' }],
+                                });
+                            }}
+                            style={{
+                                marginRight: 10,
+                                paddingHorizontal: 10,
+                                paddingVertical: 5,
+                                borderWidth: 1,
+                                borderColor: '#ccc',
+                                backgroundColor: 'white',
+                                borderRadius: 5,
+                            }}
+                        >
+                            <Text style={{ color: "#4D4B55"}}>Cerrar Sesión</Text>
+                        </TouchableOpacity>
+                    ),
+                }}
+
+            />
+
+            <Drawer.Screen
+                name="Noticias"
+                component={Noticias}
+            />
+
+            <Drawer.Screen
+                name="NuevoReporte"
+                component={ReportarSituacion}
+                options={{ title: 'Reportar una situacion' }}
+            />
+
+            {/* // Mis situaciones */}
+
+            {/* // Mis reportes */}
+
+            {/* // Cambiar contraseña */}
             <Drawer.Screen
                 name="RecoverPassword"
                 component={RecoverPassword}
@@ -112,6 +169,26 @@ const MyDrawer = () => {
 }
 
 export default function Navigation() {
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+    React.useEffect(() => {
+        getValueFor('auth').then((data) => {
+            console.log("data", JSON.parse(data)?.isLoggedIn);
+            if (data) {
+                console.log("logueado");
+                setIsLoggedIn(true);
+            }
+        });
+    }, []);
+
+    if (isLoggedIn) {
+        return (
+            <NavigationContainer>
+                <LoginDrawer />
+            </NavigationContainer>
+        );
+    }
+
     return (
         <NavigationContainer>
             <MyDrawer />

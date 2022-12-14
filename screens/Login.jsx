@@ -36,7 +36,7 @@ const Login = ({ navigation }) => {
                         isLoggedIn: true
                     });
 
-                    await save(
+                    save(
                         'auth',
                         JSON.stringify({
                             user: responseJson.datos,
@@ -45,6 +45,7 @@ const Login = ({ navigation }) => {
                     ).then(async() => {
                         setCredentials({});
                         console.log("Login", await getValueFor('auth'));
+
                         navigation.jumpTo('Home');
                     });
                 } else{

@@ -2,8 +2,6 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Keyboard, T
 import React, {useState} from 'react'
 import { globalStyles } from '../utils/globalStyles'
 import { url } from '../utils/config'
-import { save, getValueFor } from '../utils/secureStore';
-import { storeData } from '../utils/AsyncStorage';
 
 const RecoverPassword = ({ navigation }) => {
     const [credentials, setCredentials] = useState({});

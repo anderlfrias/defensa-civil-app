@@ -1,13 +1,53 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard, TouchableWithoutFeedback, ScrollView } from 'react-native'
-import React, {useState} from 'react'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard, TouchableWithoutFeedback, ScrollView, Button, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { globalStyles } from '../utils/globalStyles'
 import { url } from '../utils/config'
+import { getValueFor } from '../utils/secureStore';
+import * as ImagePicker from 'expo-image-picker';
+import ImgToBase64 from 'react-native-image-base64';
 
 const ReportarSituacion = () => {
     const [datos, setDatos] = useState({});
     const [isSending, setIsSending] = useState(false);
+    const [user, setUser] = useState({});
+    const [image, setImage] = useState(null);
 
-    const sudmit = async(data) => {
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
+
+    const pickImageAsync = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        } else {
+            alert('You did not select any image.');
+        }
+    };
+
+    const sudmit = async (data) => {
+        if (!user?.token) {
+            alert("Debe iniciar sesión");
+            return;
+        }
+
         if (!validateFields()) {
             alert("Debe completar todos los campos");
             return;
@@ -21,6 +61,7 @@ const ReportarSituacion = () => {
         formData.append('foto', data.foto);
         formData.append('latitud', data.lat);
         formData.append('longitud', data.correo);
+        formData.append('token', user.token);
 
         console.log(formData);
 
@@ -34,6 +75,7 @@ const ReportarSituacion = () => {
                 alert(responseJson.mensaje);
                 if (responseJson.exito) {
                     setDatos({});
+                    setImage(null);
                 }
             })
             .catch((error) => {
@@ -50,81 +92,101 @@ const ReportarSituacion = () => {
         }
         return false;
     };
+
+    useEffect(() => {
+        const getUser = async () => {
+            const user = await getValueFor('auth');
+            setUser(JSON.parse(user).user);
+        };
+
+        getUser();
+    }, []);
+
+    useEffect(() => {
+        if (image) {
+            setDatos({ ...datos, foto: image });
+            console.log(image);
+        }
+    }, [image]);
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.form}>
-                    <View style={styles.formHeader}>
-                        <Text style={styles.formTitle}>Formulario de Situaciones</Text>
-                        <Text style={styles.formSubtitle}>Complete los campos acontinuacion para reportar una situacion</Text>
-                    </View>
+                <View style={styles.container}>
+                    <View style={styles.form}>
+                        <View style={styles.formHeader}>
+                            <Text style={styles.formTitle}>Formulario de Situaciones</Text>
+                            <Text style={styles.formSubtitle}>Complete los campos acontinuacion para reportar una situacion</Text>
+                        </View>
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Titulo</Text>
-                        <TextInput
-                            placeholder="Titulo"
-                            onChangeText={(text) => setDatos({...datos, titulo: text})}
-                            value={datos.titulo}
-                            style={styles.input}
-                        />
-                    </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Titulo</Text>
+                            <TextInput
+                                placeholder="Titulo"
+                                onChangeText={(text) => setDatos({ ...datos, titulo: text })}
+                                value={datos.titulo}
+                                style={styles.input}
+                            />
+                        </View>
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Descripcion</Text>
-                        <TextInput
-                            placeholder="Descripcion"
-                            onChangeText={(text) => setDatos({...datos, descripcion: text})}
-                            value={datos.descripcion}
-                            style={styles.input}
-                        />
-                    </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Descripcion</Text>
+                            <TextInput
+                                placeholder="Descripcion"
+                                onChangeText={(text) => setDatos({ ...datos, descripcion: text })}
+                                value={datos.descripcion}
+                                style={styles.input}
+                                multiline={true}
+                            />
+                        </View>
 
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Foto</Text>
-                        <TextInput
-                            placeholder="Foto"
-                            onChangeText={(text) => setDatos({...datos, foto: text})}
-                            value={datos.foto}
-                            style={styles.input}
-                        />
-                    </View>
-
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Latitud</Text>
-                        <TextInput
-                            placeholder="Latitud"
-                            onChangeText={(text) => setDatos({...datos, lat: text})}
-                            value={datos.lat}
-                            style={styles.input}
-                        />
-                    </View>
-
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Longitud</Text>
-                        <TextInput
-                            placeholder="Longitud"
-                            onChangeText={(text) => setDatos({...datos, lng: text})}
-                            value={datos.lng}
-                            style={styles.input}
-                        />
-                    </View>
-
-                    <View>
-                        <TouchableOpacity
-                            onPress={async() => await sudmit(datos)}
-                            style={styles.button}
-                            disabled={isSending}
-                        >
-                            <Text
-                                style={styles.buttonText}
+                        <View style={styles.inputContainer}>
+                            {/* <Button title="Pick an image from camera roll" onPress={pickImage} /> */}
+                            <Text style={styles.label}>Foto</Text>
+                            <TouchableOpacity
+                                onPress={pickImageAsync}
+                                style={styles.input}
                             >
-                                {isSending ? 'Enviando...' : 'Enviar'}
-                            </Text>
-                        </TouchableOpacity>
+                                <Text>Seleccionar una foto</Text>
+                            </TouchableOpacity>
+                            {image && <Image source={{ uri: image }} style={styles.image} />}
+                        </View>
+
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Latitud</Text>
+                            <TextInput
+                                placeholder="Latitud"
+                                onChangeText={(text) => setDatos({ ...datos, lat: text })}
+                                value={datos.lat}
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.label}>Longitud</Text>
+                            <TextInput
+                                placeholder="Longitud"
+                                onChangeText={(text) => setDatos({ ...datos, lng: text })}
+                                value={datos.lng}
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View>
+                            <TouchableOpacity
+                                onPress={async () => await sudmit(datos)}
+                                style={styles.button}
+                                disabled={isSending}
+                            >
+                                <Text
+                                    style={styles.buttonText}
+                                >
+                                    {isSending ? 'Enviando...' : 'Enviar'}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-            </View>
             </ScrollView>
         </TouchableWithoutFeedback>
     )
@@ -180,4 +242,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'center',
     },
+    image: {
+        width: 200,
+        height: 200,
+        marginTop: 10,
+        alignSelf: 'center',
+        borderRadius: 5,
+    }
 });
